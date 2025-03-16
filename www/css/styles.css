@@ -1,0 +1,30 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+stateful-client {
+  display: inline-block;
+}
+
+game-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: tan;
+  border: 1px solid black;
+}
+
+mine-cell {
+  width: 25px;
+  height: 25px;
+  border: 0.2px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+mine-cell > * {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
