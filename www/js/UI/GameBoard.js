@@ -1,5 +1,4 @@
 import StatefulHTML from './StatefulHTML.js';
-import {smartGet, smartSet} from '../utils/arraysAndObjects.js';
 
 export default class GameBoard extends StatefulHTML {
   connectedCallback() {
@@ -7,12 +6,11 @@ export default class GameBoard extends StatefulHTML {
     const height = parseInt(this.getAttribute("height"));
     const numBombs = parseInt(this.getAttribute("numBombs"));
 
-
     const div = this.querySelector("div");
     if (!div) throw "No div found";
     div.style = `display: grid; grid-template-columns: repeat(${width}, 1fr)`;
 
-    this.dispatch({width, height, numBombs});
+    this.dispatch({ width, height, numBombs });
     this.render(this.getState());
 
     if (!window.getState) {
@@ -22,7 +20,7 @@ export default class GameBoard extends StatefulHTML {
   }
 
   render(state) {
-    const {width, height, grid} = state;
+    const { width, height } = state;
     const div = this.querySelector("div");
     if (!div) throw "No div found";
     div.innerHTML = "";
