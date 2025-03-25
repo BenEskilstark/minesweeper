@@ -6,7 +6,7 @@ export default class GameBoard extends StatefulHTML {
     const height = parseInt(this.getAttribute("height"));
     const numBombs = parseInt(this.getAttribute("numBombs"));
 
-    const div = this.querySelector("div");
+    const div = this.querySelector("#grid");
     if (!div) throw "No div found";
     div.style = `display: grid; grid-template-columns: repeat(${width}, 1fr)`;
 
@@ -20,8 +20,20 @@ export default class GameBoard extends StatefulHTML {
   }
 
   render(state) {
-    const { width, height } = state;
-    const div = this.querySelector("div");
+    const { width, height, face } = state;
+
+    const topbar = this.querySelector("#topbar");
+    topbar.innerHTML = `
+      <button style="position: absolute" 
+        onclick="closest('stateful-client').dispatch({type: 'RESET'})"
+      >
+        Restart
+      </button>
+      <div style="display: inline-block; text-align: center; flex-grow: 1"
+        >${face}</div>
+    `;
+
+    const div = this.querySelector("#grid");
     if (!div) throw "No div found";
     div.innerHTML = "";
 

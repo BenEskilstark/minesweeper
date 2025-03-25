@@ -2,26 +2,22 @@
 
 <head>
   <title>Minesweeper</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/styles2.css">
 </head>
 
 <body>
   <script type="module" src="js/index.js"></script>
   <div style="width: 100%; margin: auto; display: flex; justify-content: center">
     <stateful-client>
-      <div style="margin-top: 15px; margin-bottom: 15px;">
-        <button onclick="this.closest('stateful-client').dispatch({type: 'RESET'})">
-          Restart
-        </button>
-      </div>
       <game-board width=15 height=20 numBombs=55>
-        <div></div>
+        <div id="topbar" style="margin-top: 15px; margin-bottom: 15px;display:flex"></div>
+        <div id="grid"></div>
       </game-board>
       <div style="margin-top: 15px; margin-bottom: 15px;">
-        <button onclick="this.closest('stateful-client').dispatch({type: 'SET_CLICK_MODE', clickMode: 'FLAG'})">
+        <button onclick="closest('stateful-client').dispatch({clickMode: 'FLAG'})">
           Flag Mode
         </button>
-        <button onclick="this.closest('stateful-client').dispatch({type: 'SET_CLICK_MODE', clickMode: 'NORMAL'})">
+        <button onclick="closest('stateful-client').dispatch({clickMode: 'NORMAL'})">
           Normal Mode
         </button>
       </div>

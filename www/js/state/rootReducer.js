@@ -7,7 +7,13 @@ export const rootReducer = (state, action) => {
 
   switch (action.type) {
     case 'RESET': {
-      return { ...state, grid: null, clickMode: "NORMAL", isGameOver: false };
+      return {
+        ...state,
+        grid: null,
+        clickMode: "NORMAL",
+        isGameOver: false,
+        face: "😐",
+      };
     }
     case 'SET_CLICK_MODE': {
       return { ...state, clickMode: action.clickMode };
@@ -51,7 +57,7 @@ export const rootReducer = (state, action) => {
           for (let c of Object.values(grid)) {
             if (c.value == "💣") c.visible = true;
           }
-          return { ...state, isGameOver: true };
+          return { ...state, isGameOver: true, face: "😵" };
         }
         if (cell.value == 0) {
           getNeighbors(grid, cell)
@@ -63,12 +69,27 @@ export const rootReducer = (state, action) => {
             });
         }
       }
+
+      if (didWin(state)) {
+        state.face = "😎";
+      }
+
       return state;
     }
     default:
       return state;
   }
 };
+
+const didWin = ({ width, height, grid }) => {
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      const { value, visible } = smartGet(grid, { x, y });
+      if (value != "💣" && !visible) return false;
+    }
+  }
+  return true;
+}
 
 const initGrid = (state, pos) => {
   const grid = {};
@@ -118,6 +139,7 @@ export const initState = () => {
     width: 10, height: 10,
     numBombs: 10,
     grid: null,
+    face: "😐",
     clickMode: "NORMAL",
   };
 }
